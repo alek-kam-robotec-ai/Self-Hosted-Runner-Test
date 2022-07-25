@@ -21,6 +21,7 @@ jobs:
       - name: O3DE ROS 2 Gem checkout
         uses: actions/checkout@v3
         with:
+          repository: RobotecAI/o3de-ros2-gem
           path: o3de-ros2-gem
       - name: O3DE checkout
         uses: actions/checkout@v3
