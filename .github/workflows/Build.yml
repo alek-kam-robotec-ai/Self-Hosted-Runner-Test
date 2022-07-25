@@ -2,7 +2,6 @@ name: Build
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
     branches:
       - development
 
@@ -42,7 +41,7 @@ jobs:
           rm -r ${{ env.RUNNER_HOME }}/o3de-projects/EmptyProject 2> /dev/null
           mkdir -p ${{ env.RUNNER_HOME }}/o3de-packages
           o3de/python/get_python.sh
-          o3de/scripts/o3de.sh register --this-engine --force
+          o3de/scripts/o3de.sh register --this-engine
       - name: Create an empty project
         run: |
           o3de/scripts/o3de.sh create-project \
