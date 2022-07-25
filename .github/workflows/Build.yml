@@ -17,8 +17,6 @@ jobs:
 #     vv Change the o3de hash (LONG FORMAT!) here to fit the build vv
       O3DE_SHA: bb79fa363586e907de7c736dee554fbdae6e570d
       ROS_DISTRO: galactic
-#     vv Absolute path of the actions-runner folder (might be changed if a different machine is used) vv
-      RUNNER_HOME: ../../..
     steps:
       - name: O3DE ROS 2 Gem checkout
         uses: actions/checkout@v3
@@ -36,6 +34,14 @@ jobs:
           cd o3de
           git lfs pull
           cd ..
+      - name: Set RUNNER_HOME
+        run: |
+          RUNNER_WORK_DIR=$(pwd)
+          echo "RUNNER_WORK set to $RUNNER_WORK"
+          cd ../../..
+          echo "RUNNER_HOME=$(pwd)" >> $GITHUB_ENV
+          echo "RUNNER_HOME set to {{ env.RUNNER_HOME }}"
+          cd $RUNNER_WORK
       - name: Register the Engine
         run: |
           mkdir -p ${{ env.RUNNER_HOME }}/o3de-packages
@@ -52,7 +58,6 @@ jobs:
             -pp ${{ env.RUNNER_HOME }}/o3de-projects/EmptyProject
       - name: Create the Linux build project for the Project
         run: |
-          exit 1
           cd ${{ env.RUNNER_HOME }}/o3de-projects/EmptyProject
           cmake -B build/linux -S . -G "Ninja Multi-Config" \
             -DLY_3RDPARTY_PATH=${{ env.RUNNER_HOME }}/o3de-packages
