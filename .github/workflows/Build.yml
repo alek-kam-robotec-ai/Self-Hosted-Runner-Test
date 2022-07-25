@@ -37,10 +37,8 @@ jobs:
       - name: Set RUNNER_HOME
         run: |
           RUNNER_WORK_DIR=$(pwd)
-          echo "RUNNER_WORK set to $($RUNNER_WORK)"
           cd ../../..
           echo "RUNNER_HOME=$(pwd)" >> $GITHUB_ENV
-          echo "RUNNER_HOME set to ${{ env.RUNNER_HOME }}"
           cd $RUNNER_WORK
       - name: Register the Engine
         run: |
@@ -71,4 +69,4 @@ jobs:
       - name: Project Cleanup
         if: always()
         run: |
-          rm -r /home/akaminski/actions-runner/o3de-projects/EmptyProject 2> /dev/null
+          rm -r ${{ env.RUNNER_HOME }}/o3de-projects/EmptyProject 2> /dev/null
