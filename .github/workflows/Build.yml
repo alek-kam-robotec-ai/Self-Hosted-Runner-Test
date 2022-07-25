@@ -38,7 +38,6 @@ jobs:
           cd ..
       - name: Register the Engine
         run: |
-          rm -r ${{ env.RUNNER_HOME }}/o3de-projects/EmptyProject 2> /dev/null
           mkdir -p ${{ env.RUNNER_HOME }}/o3de-packages
           o3de/python/get_python.sh
           o3de/scripts/o3de.sh register --this-engine
@@ -63,3 +62,6 @@ jobs:
           --config release
           --target EmptyProject Editor
           -j
+      - name: Project Cleanup
+        run: |
+          sudo rm -r /home/akaminski/actions-runner/o3de-projects/EmptyProject 2> /dev/null
