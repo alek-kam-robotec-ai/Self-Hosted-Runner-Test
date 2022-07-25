@@ -15,9 +15,9 @@ jobs:
     timeout-minutes: 240
     env:
 #     vv Change the o3de hash (LONG FORMAT!) here to fit the build vv
-      O3DE_SHA: d6f5abb9e165ff166092e8190048a78498bf5710
+      O3DE_SHA: bb79fa363586e907de7c736dee554fbdae6e570d
       ROS_DISTRO: galactic
-      RUNNER_HOME: /home/alekkam/Documents/code/repos/actions-runner
+      RUNNER_HOME: /home/akaminski/actions-runner
     steps:
       - name: Repository checkout
         uses: actions/checkout@v3
