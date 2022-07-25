@@ -17,11 +17,13 @@ jobs:
 #     vv Change the o3de hash (LONG FORMAT!) here to fit the build vv
       O3DE_SHA: bb79fa363586e907de7c736dee554fbdae6e570d
       ROS_DISTRO: galactic
-      RUNNER_HOME: /home/akaminski/actions-runner
+#     vv Absolute path of the actions-runner folder (might be changed if a different machine is used) vv
+      RUNNER_HOME: ../../..
     steps:
       - name: O3DE ROS 2 Gem checkout
         uses: actions/checkout@v3
         with:
+          repository: RobotecAI/o3de-ros2-gem # DEBUG
           path: o3de-ros2-gem
       - name: O3DE checkout
         uses: actions/checkout@v3
