@@ -10,20 +10,18 @@ permissions:
 
 jobs:
   build-with-empty-project:
+    name: Build the Gem with an empty project
     runs-on: self-hosted
-    timeout-minutes: 240
+    timeout-minutes: 60
     env:
 #     vv Change the o3de hash (LONG FORMAT!) here to fit the build vv
       O3DE_SHA: bb79fa363586e907de7c736dee554fbdae6e570d
       ROS_DISTRO: galactic
       RUNNER_HOME: /home/akaminski/actions-runner
     steps:
-      - name: Repository checkout
-        uses: actions/checkout@v3
       - name: O3DE ROS 2 Gem checkout
         uses: actions/checkout@v3
         with:
-          repository: RobotecAI/o3de-ros2-gem
           path: o3de-ros2-gem
       - name: O3DE checkout
         uses: actions/checkout@v3
@@ -50,6 +48,7 @@ jobs:
           o3de/scripts/o3de.sh register --gem-path o3de-ros2-gem
           o3de/scripts/o3de.sh enable-gem -gn ROS2 \
             -pp ${{ env.RUNNER_HOME }}/o3de-projects/EmptyProject
+          exit 1
       - name: Create the Linux build project for the Project
         run: |
           cd ${{ env.RUNNER_HOME }}/o3de-projects/EmptyProject
@@ -63,6 +62,7 @@ jobs:
           --target EmptyProject Editor
           -j
       - name: Project Cleanup
+        if: always()
         continue-on-error: true
         run: |
           rm -r /home/akaminski/actions-runner/o3de-projects/EmptyProject 2> /dev/null
