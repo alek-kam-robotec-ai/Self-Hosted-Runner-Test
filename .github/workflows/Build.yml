@@ -65,7 +65,8 @@ jobs:
           --build ${{ env.RUNNER_HOME }}/o3de-projects/EmptyProject/build/linux
           --config release
           --target EmptyProject Editor
-          -j
+# vv Set to half the number of threads available vv
+          -j 12
       - name: Project Cleanup
         if: always()
         run: |
