@@ -63,5 +63,6 @@ jobs:
           --target EmptyProject Editor
           -j
       - name: Project Cleanup
+        continue-on-error: true
         run: |
-          sudo rm -r /home/akaminski/actions-runner/o3de-projects/EmptyProject 2> /dev/null
+          rm -r /home/akaminski/actions-runner/o3de-projects/EmptyProject 2> /dev/null
