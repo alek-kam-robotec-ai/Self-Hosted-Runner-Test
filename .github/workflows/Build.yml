@@ -48,9 +48,9 @@ jobs:
           o3de/scripts/o3de.sh register --gem-path o3de-ros2-gem
           o3de/scripts/o3de.sh enable-gem -gn ROS2 \
             -pp ${{ env.RUNNER_HOME }}/o3de-projects/EmptyProject
-          exit 1
       - name: Create the Linux build project for the Project
         run: |
+          exit 1
           cd ${{ env.RUNNER_HOME }}/o3de-projects/EmptyProject
           cmake -B build/linux -S . -G "Ninja Multi-Config" \
             -DLY_3RDPARTY_PATH=${{ env.RUNNER_HOME }}/o3de-packages
@@ -63,6 +63,5 @@ jobs:
           -j
       - name: Project Cleanup
         if: always()
-        continue-on-error: true
         run: |
           rm -r /home/akaminski/actions-runner/o3de-projects/EmptyProject 2> /dev/null
