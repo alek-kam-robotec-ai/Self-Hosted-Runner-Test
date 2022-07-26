@@ -39,7 +39,7 @@ jobs:
           RUNNER_WORK_DIR=$(pwd)
           cd ../../..
           echo "RUNNER_HOME=$(pwd)" >> $GITHUB_ENV
-          cd $RUNNER_WORK
+          cd $RUNNER_WORK_DIR
       - name: Register the Engine
         run: |
           mkdir -p ${{ env.RUNNER_HOME }}/o3de-packages
